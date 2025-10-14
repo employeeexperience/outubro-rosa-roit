@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartilha Interativa - Outubro Rosa ROIT</title>
     <!-- Chosen Palette: Rosa Corporativo (Baseado na imagem: Pink, Rosa Claro, Grafite) -->
-    <!-- Application Structure Plan: A SPA com navegação por abas/âncoras (Início, O que é, Prevenção, Detecção, Apoio). Esta estrutura foi escolhida para permitir que o usuário navegue livremente para a seção de seu interesse, quebrando a linearidade de um documento tradicional. A seção de Detecção será um componente interativo de 3 passos para tornar o aprendizado mais engajador e menos passivo. O fluxo é desenhado para educar e levar a uma chamada de ação clara, melhorando a usabilidade e retenção da informação. -->
+    <!-- Application Structure Plan: A SPA com navegação por abas/âncoras (Início, O que é, Prevenção, Detecção, Apoio). Esta estrutura foi escolhida para permitir que o usuário navegue livremente para a seção de seu interesse, quebrando a linearidade de um documento tradicional. A seção de Detecção foi reestruturada para focar em 2 Pilares (Prevenção e Detecção Precoce) para facilitar a absorção do conteúdo e alinhar-se aos pilares da saúde. -->
     <!-- Visualization & Content Choices: 
         - [Estatística 95%] -> Goal: Informar/Impactar -> Viz: Cartão de destaque com número animado -> Interaction: Animação ao rolar a página -> Justification: Destacar a estatística mais importante (taxa de cura) de forma visualmente forte -> Library/Method: Vanilla JS + HTML/CSS.
-        - [Pilares da Detecção] -> Goal: Organizar/Educar -> Viz: Diagrama interativo de 3 passos (abas ou cartões clicáveis) -> Interaction: Clique para revelar conteúdo -> Justification: Transforma uma lista em um guia passo a passo, facilitando a absorção do conteúdo e tornando-o menos intimidante -> Library/Method: Vanilla JS + Tailwind CSS.
-        - [Fatores de Risco/Estilo de Vida] -> Goal: Comparar/Organizar -> Viz: Layout de cartões lado a lado -> Interaction: Hover para sutil destaque -> Justification: Separa claramente os fatores de risco dos hábitos protetores, facilitando a compreensão -> Library/Method: HTML/Tailwind CSS.
+        - [Pilares da Detecção] -> Goal: Organizar/Educar -> Viz: Diagrama interativo de 2 passos (cartões clicáveis) -> Interaction: Clique para revelar conteúdo -> Justification: Transforma a lista em um guia passo a passo, facilitando a absorção do conteúdo. -> Library/Method: Vanilla JS + Tailwind CSS.
+        - [Fatores de Risco/Estilo de Vida] -> Goal: Comparar/Organizar -> Viz: Layout de cartões lado a lado com ícones leves. -> Interaction: Hover para sutil destaque -> Justification: Separa claramente os fatores de risco dos hábitos protetores. -> Library/Method: HTML/Tailwind CSS.
         - Nenhum gráfico complexo é necessário, pois o relatório é qualitativo. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+        
+        /* Poppins Regular (400) e Bold (700) foram importados */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #FFF8FB;
         }
+        
+        .poppins-bold {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .poppins-regular {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
         :target::before {
             content: "";
             display: block;
@@ -43,15 +56,15 @@
 </head>
 <body class="bg-pink-50 text-gray-800">
 
-    <!-- CONTEÚDO PRINCIPAL (Agora visível imediatamente) -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <div id="main-content">
         <!-- CABEÇALHO E NAVEGAÇÃO -->
         <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
             <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <div class="flex-shrink-0">
-                        <!-- Logo ROIT inserida aqui, mantendo a proporção de altura do cabeçalho -->
-                        <img src="uploaded:Logo ROIT azul e dourada.png-1623b111-89bb-4833-90f5-c56d22bbb2e2" alt="Logo ROIT" class="h-8 md:h-10 w-auto">
+                        <!-- Placeholder de Logo: Texto ROIT estilizado (azul grafite da ROIT) -->
+                        <div class="poppins-bold text-3xl" style="color: #152e3e; line-height: 1;">ROIT</div>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
@@ -71,36 +84,35 @@
             <section id="inicio" class="bg-white">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
                     <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
-                        <span class="text-gray-800">Outubro Rosa ROIT:</span>
-                        <span class="block text-pink-600">Saber para cuidar, cuidar para prevenir.</span>
+                        <span class="poppins-bold" style="color: #152e3e;">Outubro Rosa ROIT:</span>
+                        <span class="poppins-bold block" style="color: #dd1789;">Saber para cuidar, cuidar para prevenir.</span>
                     </h1>
-                    <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
+                    <p class="poppins-regular mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
                         Uma campanha mundial de conscientização sobre o câncer de mama. Nosso foco é desmistificar a doença e reforçar que a informação é a principal ferramenta para a vida.
                     </p>
                 </div>
             </section>
 
             <!-- SEÇÃO 2: O QUE É -->
-            <section id="oquee" class="py-20 md:py-28">
+            <section id="oquee" class="py-20 md:py-28" style="background-color: #f4badc;">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">O que é e Por Que o Diagnóstico Precoce Salva</h2>
-                        <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Entenda os conceitos básicos e a estatística mais importante desta causa.</p>
+                        <h2 class="poppins-bold text-3xl md:text-4xl font-bold" style="color: #152e3e;">O que é e por que o diagnóstico precoce salva</h2>
+                        <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-gray-600">Entenda os conceitos básicos e a estatística mais importante desta causa.</p>
                     </div>
                     <div class="grid md:grid-cols-5 gap-8 items-center">
                         <div class="md:col-span-3">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">O Básico sobre a Doença</h3>
-                            <p class="text-gray-700 leading-relaxed">
+                            <h3 class="poppins-bold text-2xl font-semibold mb-4" style="color: #152e3e;">O básico sobre a doença</h3>
+                            <p class="poppins-regular text-gray-700 leading-relaxed">
                                 O câncer de mama é o crescimento desordenado de células da mama, que se multiplicam e formam tumores. É o tipo mais comum em mulheres no mundo, depois do câncer de pele.
                             </p>
-                            <p class="mt-4 text-gray-700 leading-relaxed">
-                                Apesar de assustador, a ciência avançou muito. O ponto chave, que repetimos como um mantra, é a detecção precoce.
+                            <p class="poppins-regular mt-4 text-gray-700 leading-relaxed">
+                                A boa notícia é que, com a detecção precoce, as chances de cura são muito altas!
                             </p>
                         </div>
-                        <div class="md:col-span-2 bg-pink-600 text-white p-8 rounded-2xl shadow-2xl text-center">
-                            <p class="text-lg font-semibold">Chance de cura com diagnóstico precoce:</p>
-                            <div id="cure-rate" class="text-7xl md:text-8xl font-extrabold my-2">95%</div>
-                            <p class="text-pink-200">A informação é o seu superpoder.</p>
+                        <div class="md:col-span-2 p-8 rounded-2xl shadow-2xl text-center" style="background-color: #dd1789;">
+                            <p class="poppins-bold text-lg text-white">Chance de cura com diagnóstico precoce:</p>
+                            <div id="cure-rate" class="poppins-bold text-7xl md:text-8xl my-2 text-white">95%</div>
                         </div>
                     </div>
                 </div>
@@ -110,23 +122,29 @@
             <section id="prevencao" class="py-20 md:py-28 bg-white">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Fatores de Risco e Estilo de Vida Protetor</h2>
-                         <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Conhecer os fatores de risco é importante, mas focar em um estilo de vida saudável está ao nosso alcance.</p>
+                        <h2 class="poppins-bold text-3xl md:text-4xl font-bold" style="color: #152e3e;">Fatores de risco e um estilo de vida que te protege</h2>
+                         <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-gray-600">Conhecer os fatores de risco é importante, mas mais ainda é ter um estilo de vida saudável.</p>
                     </div>
                     <div class="grid md:grid-cols-2 gap-10">
-                        <div class="bg-pink-50/50 p-8 rounded-2xl">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Fatores de Risco</h3>
-                            <p class="mb-4 text-gray-600 text-sm">Lembre-se: ter um fator de risco não é uma sentença, mas um chamado para ter mais atenção e cuidado.</p>
-                            <ul class="space-y-3 list-disc list-inside text-gray-700">
+                        <div class="p-8 rounded-2xl shadow-lg" style="background-color: #f4badc;">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="text-2xl" style="color: #dd1789;">🔎</span>
+                                <h3 class="poppins-bold text-2xl" style="color: #dd1789;">Fatores de risco</h3>
+                            </div>
+                            <p class="poppins-regular mb-4 text-sm" style="color: #152e3e;">Lembre-se: ter um fator de risco não é uma sentença, mas um chamado para ter mais atenção e cuidado.</p>
+                            <ul class="poppins-regular space-y-3 list-disc list-inside" style="color: #152e3e;">
                                 <li><span class="font-semibold">Idade:</span> Ser mulher e ter mais de 50 anos é o principal.</li>
-                                <li><span class="font-semibold">Histórico Familiar:</span> Casos em parentes de primeiro grau.</li>
-                                <li><span class="font-semibold">Estilo de Vida:</span> Sedentarismo, obesidade e consumo excessivo de álcool.</li>
+                                <li><span class="font-semibold">Histórico familiar:</span> Casos em parentes de primeiro grau.</li>
+                                <li><span class="font-semibold">Estilo de vida:</span> Sedentarismo, obesidade e consumo excessivo de álcool.</li>
                             </ul>
                         </div>
-                         <div class="bg-green-50 p-8 rounded-2xl">
-                            <h3 class="text-2xl font-semibold text-green-800 mb-4">Dicas de Estilo de Vida Protetor</h3>
-                            <p class="mb-4 text-gray-600 text-sm">Pequenas mudanças no dia a dia que fazem uma grande diferença para sua saúde geral.</p>
-                            <ul class="space-y-3 list-disc list-inside text-green-700">
+                         <div class="p-8 rounded-2xl shadow-lg" style="background-color: #f4badc;">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <span class="text-2xl" style="color: #dd1789;">🛡️</span>
+                                <h3 class="poppins-bold text-2xl" style="color: #dd1789;">Dicas para um estilo de vida protetor</h3>
+                            </div>
+                            <p class="poppins-regular mb-4 text-sm" style="color: #152e3e;">Pequenas mudanças no dia a dia que fazem uma grande diferença para sua saúde geral.</p>
+                            <ul class="poppins-regular space-y-3 list-disc list-inside" style="color: #152e3e;">
                                 <li>Praticar exercícios físicos regularmente.</li>
                                 <li>Manter uma alimentação saudável e equilibrada.</li>
                                 <li>Evitar bebidas alcoólicas e não fumar.</li>
@@ -137,66 +155,51 @@
                 </div>
             </section>
 
-            <!-- SEÇÃO 4: DETECÇÃO -->
+            <!-- SEÇÃO 4: PILARES E DETECÇÃO -->
             <section id="deteccao" class="py-20 md:py-28">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Sua Rotina de Cuidado em 3 Passos Essenciais</h2>
-                        <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Estes são os três pilares da detecção precoce. Clique em cada passo para saber mais.</p>
+                        <h2 class="poppins-bold text-3xl md:text-4xl font-bold" style="color: #152e3e;">O controle do câncer de mama é baseado em dois pilares: prevenção e detecção precoce. Clique em cada pilar para saber mais.</h2>
+                        <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-gray-600">A ação e o conhecimento são seus maiores aliados nesta jornada de cuidado.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <!-- Step 1 Card -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                        <!-- Step 1 Card: Prevenção -->
                         <div id="step1-card" class="step-card bg-white p-6 rounded-2xl shadow-lg cursor-pointer border-4 border-transparent" data-step="1">
                             <div class="bg-pink-100 text-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                               <span class="text-3xl font-bold">1</span>
+                               <span class="poppins-bold text-3xl">1</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800">Autoconhecimento</h3>
-                            <p class="text-gray-500 mt-1">Observação Mensal</p>
+                            <h3 class="poppins-bold text-xl text-gray-800">Prevenção</h3>
+                            <p class="poppins-regular text-gray-500 mt-1">Estilo de Vida Protetor</p>
                         </div>
-                        <!-- Step 2 Card -->
+                        <!-- Step 2 Card: Detecção Precoce -->
                         <div id="step2-card" class="step-card bg-white p-6 rounded-2xl shadow-lg cursor-pointer border-4 border-transparent" data-step="2">
                             <div class="bg-pink-100 text-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                               <span class="text-3xl font-bold">2</span>
+                               <span class="poppins-bold text-3xl">2</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800">Exame Clínico</h3>
-                            <p class="text-gray-500 mt-1">Consulta Anual</p>
-                        </div>
-                        <!-- Step 3 Card -->
-                        <div id="step3-card" class="step-card bg-white p-6 rounded-2xl shadow-lg cursor-pointer border-4 border-transparent" data-step="3">
-                            <div class="bg-pink-100 text-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                               <span class="text-3xl font-bold">3</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800">Mamografia</h3>
-                            <p class="text-gray-500 mt-1">Exame Periódico</p>
+                            <h3 class="poppins-bold text-xl text-gray-800">Detecção Precoce</h3>
+                            <p class="poppins-regular text-gray-500 mt-1">Autoconhecimento e Exames</p>
                         </div>
                     </div>
 
                     <!-- Content Display Area -->
-                    <div id="step-content" class="mt-12 bg-white p-8 rounded-2xl shadow-inner min-h-[200px]">
-                        <!-- Step 1 Content -->
+                    <div id="step-content" class="mt-12 bg-white p-8 rounded-2xl shadow-inner min-h-[250px]">
+                        <!-- Step 1 Content: Prevenção -->
                         <div id="step1-content" class="step-details hidden">
-                            <h4 class="text-2xl font-bold text-pink-600 mb-4">Autoconhecimento das Mamas</h4>
-                            <p class="mb-4">Uma prática mensal para conhecer o que é normal no seu corpo e perceber qualquer mudança. O que observar:</p>
-                            <ul class="list-disc list-inside space-y-2">
-                                <li>Mudanças no tamanho ou formato da mama.</li>
-                                <li>Pele da mama avermelhada, retraída ou com aspecto de "casca de laranja".</li>
-                                <li>Nódulos, caroços ou inchaços (na mama ou axila).</li>
-                                <li>Saída de líquido (secreção) espontânea pelo mamilo.</li>
-                            </ul>
+                            <h4 class="poppins-bold text-2xl mb-4" style="color: #dd1789;">Prevenção</h4>
+                            <p class="poppins-regular mb-4" style="color: #152e3e;">A prevenção primária foca em reduzir a exposição aos fatores de risco que podem ser modificados. Isso significa adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</p>
+                            <p class="poppins-regular" style="color: #152e3e;">Lembre-se: Pequenas escolhas diárias somam-se a grandes resultados na sua saúde e bem-estar geral.</p>
                         </div>
-                         <!-- Step 2 Content -->
+                         <!-- Step 2 Content: Detecção Precoce -->
                         <div id="step2-content" class="step-details hidden">
-                            <h4 class="text-2xl font-bold text-pink-600 mb-4">Exame Clínico Anual</h4>
-                            <p class="mb-4">É a avaliação física das mamas feita por um profissional de saúde treinado (ginecologista, mastologista). É um momento importante para tirar dúvidas.</p>
-                            <p class="font-semibold">Recomendação: <span class="text-pink-600">Anualmente a partir dos 40 anos</span>, ou antes, se houver histórico familiar de alto risco.</p>
-                        </div>
-                         <!-- Step 3 Content -->
-                        <div id="step3-content" class="step-details hidden">
-                            <h4 class="text-2xl font-bold text-pink-600 mb-4">Mamografia: O Padrão Ouro</h4>
-                            <p class="mb-4">Um raio-X das mamas que detecta alterações muito pequenas, antes mesmo de serem palpáveis. É o exame mais eficaz para o diagnóstico precoce.</p>
-                            <p class="font-semibold">Recomendação Oficial (INCA/MS): <span class="text-pink-600">Mulheres entre 50 e 69 anos, a cada dois anos.</span></p>
-                            <p class="mt-2 text-sm text-gray-600">Converse com seu médico! Ele pode recomendar o exame a partir dos 40 anos, dependendo do seu caso.</p>
+                            <h4 class="poppins-bold text-2xl mb-4" style="color: #dd1789;">Detecção precoce</h4>
+                            <p class="poppins-regular mb-4" style="color: #152e3e;">A detecção precoce é a chave para o sucesso do tratamento e se baseia em dois pilares: **Autoconhecimento das Mamas** e **Mamografia**.</p>
+                            <div class="space-y-4 mt-6">
+                                <h5 class="poppins-regular text-xl font-semibold text-gray-800">Autoconhecimento das Mamas (Observação Mensal):</h5>
+                                <p class="poppins-regular" style="color: #152e3e;">Não é um exame, mas uma prática mensal para conhecer o que é normal no seu corpo e perceber qualquer mudança (nódulos, alterações na pele ou secreções).</p>
+                                <h5 class="poppins-regular text-xl font-semibold text-gray-800">Mamografia (Exame Periódico):</h5>
+                                <p class="poppins-regular" style="color: #152e3e;">É o método mais eficaz. A recomendação oficial é para mulheres entre 50 e 69 anos a cada dois anos, mas a periodicidade ideal deve ser discutida com seu médico de confiança.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -205,15 +208,15 @@
             <!-- SEÇÃO 5: APOIO -->
             <section id="apoio" class="py-20 md:py-28 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Cuidar de Si é Cuidar de Todos Nós</h2>
-                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">O apoio da família, amigos e colegas de trabalho é fundamental em toda a jornada.</p>
-                    <div class="mt-10 bg-pink-600 text-white p-8 md:p-12 rounded-2xl shadow-xl">
-                        <h3 class="text-2xl font-bold">🗓️ Sua Ação de Hoje:</h3>
-                        <p class="mt-4 text-xl md:text-2xl font-semibold max-w-2xl mx-auto">
+                     <h2 class="poppins-bold text-3xl md:text-4xl font-bold mb-4" style="color: #152e3e;">Cuidar de si é cuidar de todos nós</h2>
+                     <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-gray-600">O apoio da família, amigos e colegas de trabalho é fundamental em toda a jornada.</p>
+                    <div class="mt-10 p-8 md:p-12 rounded-2xl shadow-xl" style="background-color: #dd1789;">
+                        <h3 class="poppins-bold text-2xl text-white">🗓️ Sua ação de hoje:</h3>
+                        <p class="poppins-regular mt-4 text-xl md:text-2xl font-semibold max-w-2xl mx-auto text-white">
                             Agende sua mamografia. Agende sua consulta. Não deixe para amanhã o cuidado que você merece hoje.
                         </p>
-                        <p class="mt-6 text-pink-200">
-                            **Para os homens (e todos):** Incentivem as mulheres da sua vida a se cuidarem e a fazerem os exames. O cuidado é uma responsabilidade de todos!
+                        <p class="poppins-regular mt-6 text-pink-200 text-sm">
+                            Para os homens (e todos): Incentivem as mulheres da sua vida a se cuidarem e a fazerem os exames. O cuidado é uma responsabilidade de todos!
                         </p>
                     </div>
                 </div>
@@ -223,22 +226,15 @@
         <!-- RODAPÉ -->
         <footer class="bg-gray-800 text-white">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-sm">
-                <p>&copy; ROIT. Campanha de Conscientização Outubro Rosa.</p>
-                <p class="text-xs text-gray-400 mt-2">Fontes: Instituto Nacional de Câncer (INCA), Ministério da Saúde, Sociedade Brasileira de Mastologia.</p>
+                <p class="poppins-regular">&copy; ROIT. Campanha de Conscientização Outubro Rosa.</p>
+                <p class="poppins-regular text-xs text-gray-400 mt-2">Fontes: Instituto Nacional de Câncer (INCA), Ministério da Saúde, Sociedade Brasileira de Mastologia.</p>
             </div>
         </footer>
     </div>
 
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Acesso imediato ao conteúdo, então inicializamos a interação direto.
-            initializeContent();
-        });
-
-        // Função de inicialização do conteúdo
-        function initializeContent() {
-            // Animação do número (só roda se estiver visível)
+            // Animação do número
             const cureRateEl = document.getElementById('cure-rate');
             const targetNumber = 95;
             let currentNumber = 0;
@@ -265,7 +261,7 @@
                 observer.observe(cureRateEl);
             }
 
-            // Lógica dos Passos Interativos
+            // Lógica dos Pilares Interativos (2 Pilares)
             const stepCards = document.querySelectorAll('.step-card');
             const stepContents = document.querySelectorAll('.step-details');
             
@@ -289,7 +285,7 @@
                 });
             });
 
-            // Mostrar o primeiro passo por padrão
+            // Mostrar o primeiro pilar por padrão
             showStep(1);
 
             // Lógica da navegação ativa
@@ -313,7 +309,7 @@
             sections.forEach(section => {
                 navObserver.observe(section);
             });
-        }
+        });
     </script>
 </body>
 </html>
