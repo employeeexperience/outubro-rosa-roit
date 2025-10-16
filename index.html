@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartilha Interativa - Outubro Rosa ROIT</title>
+    
     <!-- Chosen Palette: Rosa Corporativo (Baseado na imagem: Pink, Rosa Claro, Grafite) -->
-    <!-- Application Structure Plan: A SPA com navegação por abas/âncoras. Estrutura temática: Início, O que é, Fatores de Risco, Prevenção (Pilares), Sintomas, Agenda e Apoio. O fluxo é desenhado para educar e levar a uma chamada de ação clara, melhorando a usabilidade e retenção da informação. -->
-    <!-- Visualization & Content Choices: Destaque de 95% de cura, Pilares interativos e Carrossel de Eventos. -->
+    <!-- Application Structure Plan: SPA com navegação por âncoras focada na ação. Estrutura por seções temáticas (O que é, Fatores de Risco, Prevenção/Detecção, Sintomas, Agenda). Carrossel de eventos e cards interativos para guiar a exploração. -->
+    <!-- Visualization & Content Choices: Destaque de 95% de cura (animação JS), uso de fontes Poppins e esquema de cores ROIT. Ícones e imagens decorativas (circulo-rosa.png, Logo ROIT azul e dourada.png) para reforçar a identidade visual. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -48,16 +49,10 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
-        
-        /* Estilos do Carrossel */
+
+        /* Classes para o carrossel da Agenda */
         .event-card {
-            min-width: 100%;
-        }
-        @media (min-width: 768px) {
-            .event-card { min-width: 50%; }
-        }
-        @media (min-width: 1024px) {
-            .event-card { min-width: 33.3333%; }
+            min-width: 300px; /* Para garantir largura mínima no mobile */
         }
     </style>
 </head>
@@ -68,24 +63,20 @@
         <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
             <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
-                    <div class="flex-shrink-0">
+                    <div class="flex-shrink-0 flex items-center">
                         <!-- Logo ROIT -->
                         <img 
                             src="./assets/Logo ROIT azul e dourada.png" 
-                            alt="Logo ROIT Azul e Dourada" 
-                            class="h-12 w-auto" 
-                            onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
-                        />
-                        <!-- Fallback caso a imagem não carregue -->
-                        <div class="poppins-bold text-3xl hidden" style="color: #152e3e; line-height: 1;">ROIT</div>
+                            alt="Logo ROIT" 
+                            class="h-10 w-auto"
+                            onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-3xl\' style=\'color: #152e3e; line-height: 1;\'>ROIT</div>';"
+                        >
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="#inicio" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">INÍCIO</a>
                             <a href="#oquee" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">O QUE É</a>
-                            <!-- FATORES DE RISCO (anteriormente Prevenção) -->
                             <a href="#prevencao" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">FATORES DE RISCO</a>
-                            <!-- PREVENÇÃO (anteriormente Pilar Cuidado) -->
                             <a href="#deteccao" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">PREVENÇÃO</a>
                             <a href="#sintomas" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">SINTOMAS</a>
                             <a href="#agenda" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">AGENDA</a>
@@ -136,8 +127,25 @@
             </section>
 
             <!-- SEÇÃO 3: FATORES DE RISCO -->
-            <section id="prevencao" class="py-20 md:py-28 bg-white">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section id="prevencao" class="py-20 md:py-28 bg-white relative overflow-hidden">
+                <!-- IMAGEM DECORATIVA ESQUERDA: Círculo Rosa (assets/circulo-rosa.png) -->
+                <img 
+                    src="./assets/circulo-rosa.png" 
+                    alt="Círculo Rosa Decorativo" 
+                    class="absolute top-1/4 left-0 w-48 h-48 md:w-1/4 lg:w-1/3 h-auto opacity-50 z-0 hidden sm:block" 
+                    style="transform: translateX(-50%);"
+                    onerror="this.style.display='none'"
+                >
+                <!-- IMAGEM DECORATIVA DIREITA: Círculo Rosa (assets/circulo-rosa.png) -->
+                <img 
+                    src="./assets/circulo-rosa.png" 
+                    alt="Círculo Rosa Decorativo" 
+                    class="absolute bottom-1/4 right-0 w-48 h-48 md:w-1/4 lg:w-1/3 h-auto opacity-50 z-0 hidden sm:block" 
+                    style="transform: translateX(50%);"
+                    onerror="this.style.display='none'"
+                >
+
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div class="text-center mb-16">
                         <h2 class="poppins-bold text-3xl md:text-4xl font-bold" style="color: #152e3e;">Fatores de risco e um estilo de vida que te protege</h2>
                          <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-gray-600">Conhecer os fatores de risco é importante, mas mais ainda é ter um estilo de vida saudável.</p>
@@ -150,9 +158,9 @@
                             </div>
                             <p class="poppins-regular mb-4 text-sm" style="color: #152e3e;">Lembre-se: ter um fator de risco não é uma sentença, mas um chamado para ter mais atenção e cuidado.</p>
                             <ul class="poppins-regular space-y-3 list-disc list-inside" style="color: #152e3e;">
-                                <li><span class="font-semibold">Idade:</span> Ser mulher e ter mais de 50 anos é o principal.</li>
-                                <li><span class="font-semibold">Histórico familiar:</span> Casos em parentes de primeiro grau.</li>
-                                <li><span class="font-semibold">Estilo de vida:</span> Sedentarismo, obesidade e consumo excessivo de álcool.</li>
+                                <li><span class="font-bold">Idade:</span> Ser mulher e ter mais de 50 anos é o principal.</li>
+                                <li><span class="font-bold">Histórico familiar:</span> Casos em parentes de primeiro grau.</li>
+                                <li><span class="font-bold">Estilo de vida:</span> Sedentarismo, obesidade e consumo excessivo de álcool.</li>
                             </ul>
                         </div>
                          <div class="p-8 rounded-2xl shadow-lg" style="background-color: #f4badc;">
@@ -160,9 +168,11 @@
                                 <span class="text-2xl" style="color: #dd1789;">🛡️</span>
                                 <h3 class="poppins-bold text-2xl" style="color: #dd1789;">Dicas para um estilo de vida protetor</h3>
                             </div>
+                            <p class="poppins-regular mb-4 text-sm" style="color: #152e3e;">
+                                <span class="font-bold">💡 Lembre-se: Pequenas escolhas diárias somam-se a grandes resultados na sua saúde e bem-estar geral.</span>
                             </p>
                             <ul class="poppins-regular space-y-3 list-disc list-inside" style="color: #152e3e;">
-                                <li><span class="font-regular">Adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</span></li>
+                                <li><span class="font-bold">Adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</span></li>
                                 <li>Manter uma alimentação saudável e equilibrada.</li>
                                 <li>Evitar bebidas alcoólicas e não fumar.</li>
                                 <li>Manter o peso corporal adequado.</li>
@@ -172,7 +182,7 @@
                 </div>
             </section>
 
-            <!-- SEÇÃO 4: PREVENÇÃO (PILAREs) -->
+            <!-- SEÇÃO 4: PREVENÇÃO (PILAR CUIDADO) -->
             <section id="deteccao" class="py-20 md:py-28" style="background-color: #dd1789;">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
@@ -181,7 +191,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-                        <!-- Pilar 1: Prevenção -->
+                        <!-- Step 1 Card: Prevenção -->
                         <div id="step1-card" class="step-card bg-white p-6 rounded-2xl shadow-lg cursor-pointer border-4 border-[#f4badc]" data-step="1">
                             <div class="bg-[#f4badc] text-[#dd1789] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                <span class="poppins-bold text-3xl">1</span>
@@ -189,7 +199,7 @@
                             <h3 class="poppins-bold text-xl text-gray-800">Prevenção</h3>
                             <p class="poppins-regular text-gray-500 mt-1">Estilo de vida protetor</p>
                         </div>
-                        <!-- Pilar 2: Detecção Precoce -->
+                        <!-- Step 2 Card: Detecção Precoce -->
                         <div id="step2-card" class="step-card bg-white p-6 rounded-2xl shadow-lg cursor-pointer border-4 border-[#f4badc]" data-step="2">
                             <div class="bg-[#f4badc] text-[#dd1789] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                                <span class="poppins-bold text-3xl">2</span>
@@ -199,15 +209,15 @@
                         </div>
                     </div>
 
-                    <!-- Conteúdo Interativo dos Pilares -->
+                    <!-- Content Display Area -->
                     <div id="step-content" class="mt-12 bg-white p-8 rounded-2xl shadow-inner min-h-[250px]">
-                        <!-- Conteúdo 1: Prevenção -->
+                        <!-- Step 1 Content: Prevenção -->
                         <div id="step1-content" class="step-details hidden">
                             <h4 class="poppins-bold text-2xl mb-4" style="color: #dd1789;">Prevenção</h4>
                             <p class="poppins-regular mb-4" style="color: #152e3e;">A prevenção primária foca em reduzir a exposição aos fatores de risco que podem ser modificados. Isso significa <span class="font-bold">adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</span></p>
                             <p class="poppins-regular" style="color: #152e3e;"><span class="font-bold">💡 Lembre-se: Pequenas escolhas diárias somam-se a grandes resultados na sua saúde e bem-estar geral.</span></p>
                         </div>
-                         <!-- Conteúdo 2: Detecção Precoce -->
+                         <!-- Step 2 Content: Detecção Precoce -->
                         <div id="step2-content" class="step-details hidden">
                             <h4 class="poppins-bold text-2xl mb-4" style="color: #dd1789;">Detecção precoce</h4>
                             <p class="poppins-regular mb-4" style="color: #152e3e;">A detecção precoce é a chave para o sucesso do tratamento e se baseia em dois pilares: <span class="font-bold">Autoconhecimento das mamas</span> e <span class="font-bold">Mamografia</span>.</p>
@@ -254,175 +264,79 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Imagem dos Limões (sintomas-limoes.png) -->
-                    <div class="mt-12 flex justify-center">
+                    
+                    <!-- Imagem Limões (Movida para o final da seção) -->
+                    <div class="flex justify-center mt-12">
                         <img 
                             src="./assets/sintomas-limoes.png" 
-                            alt="Infográfico de sintomas (limões)" 
-                            class="max-w-full h-auto rounded-lg shadow-md md:max-w-xl"
+                            alt="Imagem didática dos sintomas (limões)" 
+                            class="max-w-full h-auto rounded-lg shadow-md md:max-w-2xl"
+                            onerror="this.style.display='none'"
                         />
                     </div>
                 </div>
             </section>
 
-            <!-- SEÇÃO 6: AGENDA (CARROSSEL) -->
+            <!-- SEÇÃO 6: AGENDA (Carrossel) -->
             <section id="agenda" class="py-20 md:py-28 relative overflow-hidden" style="background-color: #dd1789;">
-
-    <!-- IMAGEM DECORATIVA ESQUERDA: Círculo Rosa (assets/circulo-rosa.png) -->
-
-    <img 
-
-        src="./assets/circulo-rosa.png" 
-
-        alt="Círculo Rosa Decorativo" 
-
-        class="absolute top-1/4 left-0 w-24 h-24 md:w-32 md:h-32 opacity-30 z-0 hidden sm:block" 
-
-        style="transform: translateX(-50%);"
-
-        onerror="this.style.display='none'"
-
-    >
-
-
-
-    <!-- IMAGEM DECORATIVA DIREITA: Círculo Rosa (assets/circulo-rosa.png) -->
-
-    <img 
-
-        src="./assets/circulo-rosa.png" 
-
-        alt="Círculo Rosa Decorativo" 
-
-        class="absolute bottom-1/4 right-0 w-24 h-24 md:w-32 md:h-32 opacity-30 z-0 hidden sm:block" 
-
-        style="transform: translateX(50%);"
-
-        onerror="this.style.display='none'"
-
-    >
-
-
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        <div class="text-center mb-12">
-
-            <h2 class="poppins-bold text-3xl md:text-4xl font-bold text-white">Salve na sua agenda</h2>
-
-            <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-pink-100">Participe dos eventos especiais:</p>
-
-        </div>
-
-
-
-        <!-- Carrossel (Carousel) Container -->
-
-        <div id="event-carousel-container" class="relative overflow-x-auto">
-
-            <div id="event-carousel" class="flex transition-transform duration-500 ease-in-out">
-
-                
-
-                <!-- Card 1: Uma nova abordagem (20/10) -->
-
-                <div class="event-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4">
-
-                    <div class="bg-white p-6 rounded-2xl shadow-xl h-full flex flex-col justify-between">
-
-                        <div>
-
-                            <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 20/10 às 14h</p>
-
-                            <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Uma nova abordagem e uma nova maneira de enxergar o câncer de mama</h3>
-
-                            <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Exames normais garantem, de fato, que você está saudável? E antes dos 40, quando a mamografia ainda não é indicada, será que a mulher está totalmente segura? Essas perguntas nos convidam a repensar o que realmente significa prevenção do câncer de mama. Mais do que exames, trata-se de uma nova maneira de olhar para o cuidado: hábitos, autocuidado e escolhas que podem fazer a diferença no dia a dia.</p>
-
-                            <p class="poppins-regular text-xs text-gray-500 mt-2">Um evento Wellhub</p>
-
-                        </div>
-
-                        <a href="https://promo.gympass.com/br/calendarioexclusivo/clkn/https/www.addevent.com/event/kz26731814?ajs_aid=7365c9a8-ab64-4d3e-a5d8-6d79f9149f05&fbp=fb.2.1760549941973.5694743280" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
-
-                            Marque na agenda
-
-                        </a>
-
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="text-center mb-12">
+                        <h2 class="poppins-bold text-3xl md:text-4xl font-bold text-white">Salve na sua agenda</h2>
+                        <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-pink-100">Participe dos eventos especiais:</p>
                     </div>
 
-                </div>
+                    <!-- Carrossel (Carousel) Container -->
+                    <div id="event-carousel-container" class="relative overflow-x-auto">
+                        <div id="event-carousel" class="flex transition-transform duration-500 ease-in-out">
+                            
+                            <!-- Card 1: Uma nova abordagem (20/10) -->
+                            <div class="event-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4">
+                                <div class="bg-white p-6 rounded-2xl shadow-xl h-full flex flex-col justify-between">
+                                    <div>
+                                        <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 20/10 às 14h</p>
+                                        <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Uma nova abordagem e uma nova maneira de enxergar o câncer de mama</h3>
+                                        <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Exames normais garantem, de fato, que você está saudável? E antes dos 40, quando a mamografia ainda não é indicada, será que a mulher está totalmente segura? Essas perguntas nos convidam a repensar o que realmente significa prevenção do câncer de mama. Mais do que exames, trata-se de uma nova maneira de olhar para o cuidado: hábitos, autocuidado e escolhas que podem fazer a diferença no dia a dia.</p>
+                                        <p class="poppins-regular text-xs text-gray-500 mt-2">Um evento Wellhub</p>
+                                    </div>
+                                    <a href="https://promo.gympass.com/br/calendarioexclusivo/clkn/https/www.addevent.com/event/kz26731814?ajs_aid=7365c9a8-ab64-4d3e-a5d8-6d79f9149f05&fbp=fb.2.1760549941973.5694743280" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
+                                        Marque na agenda
+                                    </a>
+                                </div>
+                            </div>
 
-
-
-                <!-- Card 2: Happy Hour das Gurias (24/10) -->
-
-                <div class="event-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4">
-
-                    <div class="bg-white p-6 rounded-2xl shadow-xl h-full flex flex-col justify-between">
-
-                        <div>
-
-                            <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 24/10 às 17:30</p>
-
-                            <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Happy Hour das Gurias</h3>
-
-                            <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Um momento de descontração só entre garotas! Vista sua brusinha rosa, pegue seu café, coquinha gelada o chá e participe desse momento! Ah, e vai ter sorteio, viu? 💗</p>
-
+                            <!-- Card 2: Happy Hour das Gurias (24/10) -->
+                            <div class="event-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4">
+                                <div class="bg-white p-6 rounded-2xl shadow-xl h-full flex flex-col justify-between">
+                                    <div>
+                                        <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 24/10 às 17:30</p>
+                                        <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Happy hour das gurias</h3>
+                                        <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Um momento de descontração só entre garotas! Vista sua brusinha rosa, pegue seu café, coquinha gelada o chá e participe desse momento! Ah, e vai ter sorteio, viu? 💗</p>
+                                    </div>
+                                     <a href="#" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
+                                        Marque na agenda
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 3: Equilíbrio e Bem-Estar Feminino (27/10) -->
+                            <div class="event-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4">
+                                <div class="bg-white p-6 rounded-2xl shadow-xl h-full flex flex-col justify-between">
+                                    <div>
+                                        <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 27/10 às 11h</p>
+                                        <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Equilíbrio e bem-estar feminino: saúde integral no Outubro Rosa</h3>
+                                        <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Com uma fala acolhedora e prática, Natalia Lima conecta a prevenção do câncer ao cuidado emocional e ao autocuidado no dia a dia. A palestra traz reflexões sobre nutrição, sono, manejo do estresse e a importância da rede de apoio, finalizando com uma prática leve e interativa. </p>
+                                         <p class="poppins-regular text-xs text-gray-500 mt-2">Um evento Wellhub</p>
+                                    </div>
+                                    <a href="https://promo.gympass.com/br/calendarioexclusivo/clkn/https/www.addevent.com/event/AU26718345?ajs_aid=7365c9a8-ab64-4d3e-a5d8-6d79f9149f05&fbp=fb.2.1760549941973.5694743280" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
+                                        Marque na agenda
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-
-                         <a href="#" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
-
-                            Marque na agenda
-
-                        </a>
-
                     </div>
-
                 </div>
-
-                
-
-                <!-- Card 3: Equilíbrio e Bem-Estar Feminino (27/10) -->
-
-                <div class="event-card flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4">
-
-                    <div class="bg-white p-6 rounded-2xl shadow-xl h-full flex flex-col justify-between">
-
-                        <div>
-
-                            <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 27/10 às 11h</p>
-
-                            <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Equilíbrio e bem-estar feminino: saúde integral no Outubro Rosa</h3>
-
-                            <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Com uma fala acolhedora e prática, Natalia Lima conecta a prevenção do câncer ao cuidado emocional e ao autocuidado no dia a dia. A palestra traz reflexões sobre nutrição, sono, manejo do estresse e a importância da rede de apoio, finalizando com uma prática leve e interativa. </p>
-
-                             <p class="poppins-regular text-xs text-gray-500 mt-2">Um evento Wellhub</p>
-
-                        </div>
-
-                        <a href="https://promo.gympass.com/br/calendarioexclusivo/clkn/https/www.addevent.com/event/AU26718345?ajs_aid=7365c9a8-ab64-4d3e-a5d8-6d79f9149f05&fbp=fb.2.1760549941973.5694743280" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
-
-                            Marque na agenda
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- NOTA: Botões de navegação removidos conforme solicitação anterior -->
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-
+            </section>
+            
             <!-- SEÇÃO 7: APOIO -->
             <section id="apoio" class="py-20 md:py-28 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -505,6 +419,38 @@
 
             // Mostrar o primeiro pilar por padrão
             showStep(1);
+            
+            // Lógica JavaScript do Carrossel (Apenas rolagem tátil e responsividade)
+            const carouselContainer = document.getElementById('event-carousel-container');
+            const carousel = document.getElementById('event-carousel');
+            const cards = document.querySelectorAll('.event-card');
+            
+            if (carouselContainer && carousel && cards.length > 0) {
+                const cardWidth = cards[0].offsetWidth; // Largura do card + padding
+                
+                // Define a largura total do carrossel para que a rolagem funcione
+                const updateCarousel = () => {
+                    const containerWidth = carouselContainer.offsetWidth;
+                    // Se for desktop/tablet, define a largura total para que a rolagem horizontal funcione
+                    if (window.innerWidth >= 768) {
+                        const totalWidth = cards.length * (containerWidth / 3);
+                        carousel.style.width = `${totalWidth}px`;
+                    } else {
+                        // No mobile, a rolagem é nativa (overflow-x-auto)
+                        carousel.style.width = 'fit-content';
+                    }
+                };
+
+                // Garante que o carrossel é atualizado no carregamento e redimensionamento
+                window.addEventListener('load', updateCarousel);
+                window.addEventListener('resize', updateCarousel);
+                
+                // Adiciona rolagem suave no container
+                carouselContainer.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    carouselContainer.scrollLeft += e.deltaY;
+                });
+            }
 
             // Lógica da navegação ativa
             const sections = document.querySelectorAll('section');
@@ -528,26 +474,7 @@
             sections.forEach(section => {
                 navObserver.observe(section);
             });
-
-                        // Lógica JavaScript do Carrossel (Colado no final, como solicitado)
-            const carousel = document.getElementById('event-carousel');
-            
-            function updateCarouselStyle() {
-                // Remove a transição suave para não interferir na rolagem tátil
-                carousel.style.transition = 'none';
-                // Garante que o carrossel use a rolagem horizontal nativa, mas mantém o estilo de flexbox
-            }
-
-            // Inicializa e lida com o redimensionamento da tela
-            window.addEventListener('resize', updateCarouselStyle);
-            updateCarouselStyle(); // Inicializa o carrossel na carga
-
         });
     </script>
 </body>
 </html>
-
-
-
-
-
