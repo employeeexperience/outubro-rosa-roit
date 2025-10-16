@@ -89,27 +89,23 @@
         </header>
 
         <main>
-            <!-- SEÇÃO 1: INÍCIO (Tamanho revertido para a versão anterior: apenas padding) -->
+            <!-- SEÇÃO 1: INÍCIO (DESIGN CENTRALIZADO COM LOGO PROEMINENTE) -->
             <section id="inicio" class="bg-white" style="background-image: url('./assets/textura.png'); background-size: cover; background-position: center;">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 md:text-left">
-                    <div class="flex flex-col items-start justify-start">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <!-- Logo da Campanha (Grande, alinhada com o título) -->
-                            <img 
-                                src="./assets/logo-campanha.png" 
-                                alt="Logo Outubro Rosa ROIT" 
-                                class="w-auto h-16 md:h-20" style="max-height: 5rem; min-width: 5rem;" 
-                                onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600 mb-6 md:mb-0\'>ROSA</div>';"
-                            >
-                            
-                            <!-- Título Principal -->
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
-                                <span class="poppins-bold block" style="color: #dd1789;">Saber para cuidar, cuidar para prevenir.</span>
-                            </h1>
-                        </div>
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
+                    <div class="flex flex-col items-center justify-center">
                         
-                        <!-- Subtítulo centralizado abaixo da H1 e Logo -->
-                        <p class="poppins-regular mt-6 max-w-3xl text-lg md:text-xl text-gray-600">
+                        <!-- Logo da Campanha (Centralizada e Grande) -->
+                        <img 
+                            src="./assets/logo-campanha.png" 
+                            alt="Logo Outubro Rosa ROIT" 
+                            class="w-auto h-20 md:h-24 lg:h-32 mx-auto mb-6" 
+                            onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-6xl text-pink-600 mb-6\'>ROSA</div>';"
+                        >
+                        
+                        <!-- Título Principal (Removido, apenas o Subtítulo resta) -->
+                        
+                        <!-- Subtítulo centralizado -->
+                        <p class="poppins-regular mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
                             Uma campanha mundial de conscientização sobre o câncer de mama. Nosso foco é desmistificar a doença e reforçar que a informação é a principal ferramenta para a vida.
                         </p>
                     </div>
@@ -353,13 +349,13 @@
             <!-- SEÇÃO 7: CONSCIENTIZAÇÃO -->
             <section id="conscientizacao" class="py-20 md:py-28 bg-white">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <!-- Coluna 1: Imagem (Grande) -->
-                        <div class="flex justify-center md:justify-start h-full max-h-96">
+                    <div class="grid md:grid-cols-2 gap-10 items-stretch">
+                        <!-- Coluna 1: Imagem (Ajustada à altura do texto) -->
+                        <div class="flex justify-center md:justify-start items-center h-full">
                             <img 
                                 src="./assets/pare.png" 
                                 alt="Pare, Pense e Cuide" 
-                                class="h-full w-auto rounded-lg shadow-xl object-contain"
+                                class="h-auto w-full max-w-xs md:max-w-full md:h-full rounded-lg shadow-xl object-contain"
                                 onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600\'>PARE</div>';"
                             >
                         </div>
@@ -370,7 +366,7 @@
                                 O conhecimento é o seu maior aliado! 🩷
                             </h2>
                             
-                            <div class="p-6 rounded-xl shadow-lg" style="background-color: #fcc4e6;">
+                            <div class="p-6 rounded-xl shadow-lg h-full" style="background-color: #fcc4e6;">
                                 <p class="poppins-regular mt-4 text-lg text-gray-800 leading-relaxed">
                                     <span class="font-bold">Esta jornada do Outubro Rosa é para todos! O cuidado começa com a informação e com a consciência de que a prevenção é um processo contínuo e fundamental.</span> 
                                     <br><br>
