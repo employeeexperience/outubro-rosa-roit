@@ -80,7 +80,7 @@
                             <a href="#deteccao" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">PREVENÇÃO</a>
                             <a href="#sintomas" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">SINTOMAS</a>
                             <a href="#agenda" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">AGENDA</a>
-                            <a href="#apoio" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">APOIO</a>
+                            <a href="#conscientizacao" class="nav-link px-3 py-2 text-sm font-semibold text-gray-600 border-b-2 border-transparent">CONSCIENTIZAÇÃO</a>
                         </div>
                     </div>
                 </div>
@@ -89,26 +89,29 @@
 
         <main>
             <!-- SEÇÃO 1: INÍCIO (HEADER COM LOGO DA CAMPANHA) -->
-            <section id="inicio" class="bg-white">
+            <section id="inicio" class="bg-white" style="background-image: url('./assets/textura.png'); background-size: cover; background-position: center;">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
-                    <div class="flex flex-col items-center justify-center md:flex-row md:space-x-6">
-                        <!-- Logo da Campanha -->
-                        <img 
-                            src="./assets/logo-campanha.png" 
-                            alt="Logo Outubro Rosa ROIT" 
-                            class="w-32 h-auto mb-6 md:mb-0 md:w-40"
-                            onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600 mb-6 md:mb-0\'>ROSA</div>';"
-                        >
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="flex items-center justify-center md:flex-row md:space-x-6">
+                            <!-- Logo da Campanha (Ajustado para o tamanho do título) -->
+                            <img 
+                                src="./assets/logo-campanha.png" 
+                                alt="Logo Outubro Rosa ROIT" 
+                                class="w-32 h-auto mb-6 md:mb-0 md:w-auto" style="max-height: 5rem;" 
+                                onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600 mb-6 md:mb-0\'>ROSA</div>';"
+                            >
+                            
+                            <!-- Título Principal -->
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
+                                <span class="poppins-bold block" style="color: #dd1789;">Saber para cuidar, cuidar para prevenir.</span>
+                            </h1>
+                        </div>
                         
-                        <!-- Título Principal -->
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight md:text-left">
-                            <span class="poppins-bold" style="color: #152e3e;">Outubro Rosa ROIT:</span>
-                            <span class="poppins-bold block" style="color: #dd1789;">Saber para cuidar, cuidar para prevenir.</span>
-                        </h1>
+                        <!-- Subtítulo centralizado abaixo da H1 e Logo -->
+                        <p class="poppins-regular mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
+                            Uma campanha mundial de conscientização sobre o câncer de mama. Nosso foco é desmistificar a doença e reforçar que a informação é a principal ferramenta para a vida.
+                        </p>
                     </div>
-                    <p class="poppins-regular mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
-                        Uma campanha mundial de conscientização sobre o câncer de mama. Nosso foco é desmistificar a doença e reforçar que a informação é a principal ferramenta para a vida.
-                    </p>
                 </div>
             </section>
 
@@ -179,9 +182,7 @@
                                 <span class="text-2xl" style="color: #dd1789;">🛡️</span>
                                 <h3 class="poppins-bold text-2xl" style="color: #dd1789;">Dicas para um estilo de vida protetor</h3>
                             </div>
-                            <p class="poppins-regular mb-4 text-sm" style="color: #152e3e;">
-                                <span class="font-bold">💡 Lembre-se: Pequenas escolhas diárias somam-se a grandes resultados na sua saúde e bem-estar geral.</span>
-                            </p>
+                            
                             <ul class="poppins-regular space-y-3 list-disc list-inside" style="color: #152e3e;">
                                 <li>Adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</li>
                                 <li>Manter uma alimentação saudável e equilibrada.</li>
@@ -198,7 +199,7 @@
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
                         <h2 class="poppins-bold text-3xl md:text-4xl font-bold text-white">O controle do câncer de mama é baseado em dois pilares</h2>
-                        <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-white">A ação e o conhecimento são seus maiores aliados nesta jornada de cuidado. Clique em cada pilar para saber mais.</p>
+                        <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-white">Ação e o conhecimento são seus maiores aliados nesta jornada de cuidado. Clique em cada pilar para saber mais.</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
@@ -348,20 +349,41 @@
                 </div>
             </section>
             
-            <!-- SEÇÃO 7: APOIO -->
-            <section id="apoio" class="py-20 md:py-28 bg-white">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                     <h2 class="poppins-bold text-3xl md:text-4xl font-bold mb-4" style="color: #152e3e;">Cuidar de si é cuidar de todos nós</h2>
-                     <p class="poppins-regular mt-4 max-w-2xl mx-auto text-lg text-gray-600">O apoio da família, amigos e colegas de trabalho é fundamental em toda a jornada.</p>
-                    <div class="mt-10 p-8 md:p-12 rounded-2xl shadow-xl" style="background-color: #dd1789;">
-                        <h3 class="poppins-bold text-2xl text-white">🗓️ Sua ação de hoje:</h3>
-                        <p class="poppins-regular mt-4 text-xl md:text-2xl font-semibold max-w-2xl mx-auto text-white">
-                            Agende sua mamografia. Agende sua consulta. Não deixe para amanhã o cuidado que você merece hoje.
-                        </p>
-                        <p class="poppins-regular mt-6 text-pink-200 text-sm">
-                            Para os homens (e todos): Incentivem as mulheres da sua vida a se cuidarem e a fazerem os exames. O cuidado é uma responsabilidade de todos!
-                        </p>
+            <!-- SEÇÃO 7: CONSCIENTIZAÇÃO -->
+            <section id="conscientizacao" class="py-20 md:py-28 bg-white">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 gap-10 items-center">
+                        <!-- Coluna 1: Imagem -->
+                        <div class="flex justify-center md:justify-start">
+                            <img 
+                                src="./assets/pare.png" 
+                                alt="Pare, Pense e Cuide" 
+                                class="w-48 h-auto rounded-lg shadow-xl"
+                                onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600\'>PARE</div>';"
+                            >
+                        </div>
+                        
+                        <!-- Coluna 2: Texto (Novo Design) -->
+                        <div class="text-center md:text-left">
+                            <h2 class="poppins-bold text-3xl md:text-4xl font-bold mb-6" style="color: #dd1789;">
+                                O conhecimento é o seu maior aliado! 🩷
+                            </h2>
+                            
+                            <div class="p-6 rounded-xl shadow-lg" style="background-color: #fcc4e6;">
+                                <p class="poppins-regular mt-4 text-lg text-gray-800 leading-relaxed">
+                                    Esta jornada do Outubro Rosa é para todos! O cuidado começa com a informação e com a consciência de que a prevenção é um processo contínuo e fundamental. 
+                                    <br><br>
+                                    É importante que as mulheres priorizem o autocuidado e agendem seus exames. 
+                                    <br><br>
+                                    E para os homens: o apoio, o incentivo e o lembrete carinhoso são ações poderosas. 
+                                    <br><br>
+                                    O conhecimento é para todos nós!
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <!-- Bloco de Call to Action Final (Removido) -->
                 </div>
             </section>
         </main>
