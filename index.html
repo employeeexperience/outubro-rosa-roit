@@ -442,52 +442,22 @@
                 navObserver.observe(section);
             });
 
-            // Lógica JavaScript do Carrossel (Colado no final, como solicitado)
+                        // Lógica JavaScript do Carrossel (Colado no final, como solicitado)
             const carousel = document.getElementById('event-carousel');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            let currentIndex = 0;
-
-            function getCardWidth() {
-                // Calcula o número de cards visíveis com base na tela
-                const containerWidth = document.getElementById('event-carousel-container').offsetWidth;
-                if (window.innerWidth >= 1024) return containerWidth / 3; // lg:w-1/3
-                if (window.innerWidth >= 768) return containerWidth / 2;  // md:w-1/2
-                return containerWidth;                                      // w-full
+            
+            function updateCarouselStyle() {
+                // Remove a transição suave para não interferir na rolagem tátil
+                carousel.style.transition = 'none';
+                // Garante que o carrossel use a rolagem horizontal nativa, mas mantém o estilo de flexbox
             }
-
-            function updateCarousel() {
-                const cardWidth = getCardWidth();
-                const offset = -currentIndex * cardWidth;
-                carousel.style.transform = `translateX(${offset}px)`;
-                // Ajuste fino para evitar espaço em branco no final
-                const maxIndex = carousel.children.length - Math.round(document.getElementById('event-carousel-container').offsetWidth / cardWidth);
-                if (currentIndex > maxIndex) currentIndex = maxIndex;
-            }
-
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                }
-            });
-
-            nextBtn.addEventListener('click', () => {
-                const cardWidth = getCardWidth();
-                const visibleCards = Math.round(document.getElementById('event-carousel-container').offsetWidth / cardWidth);
-                const maxIndex = carousel.children.length - visibleCards;
-                
-                if (currentIndex < maxIndex) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            });
 
             // Inicializa e lida com o redimensionamento da tela
-            window.addEventListener('resize', updateCarousel);
-            updateCarousel(); // Inicializa o carrossel na carga
+            window.addEventListener('resize', updateCarouselStyle);
+            updateCarouselStyle(); // Inicializa o carrossel na carga
+
         });
     </script>
 </body>
 </html>
+
 
