@@ -89,15 +89,15 @@
 
         <main>
             <!-- SEÇÃO 1: INÍCIO (HEADER COM LOGO DA CAMPANHA) -->
-            <section id="inicio" class="bg-white" style="background-image: url('./assets/textura.png'); background-size: cover; background-position: center;">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="flex items-center justify-center md:flex-row md:space-x-6">
-                            <!-- Logo da Campanha (Ajustado para o tamanho do título) -->
+            <section id="inicio" class="bg-white min-h-screen flex items-center justify-center" style="background-image: url('./assets/textura.png'); background-size: cover; background-position: center;">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 md:text-left">
+                    <div class="flex flex-col items-start justify-start">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Logo da Campanha (Grande, alinhada com o título) -->
                             <img 
                                 src="./assets/logo-campanha.png" 
                                 alt="Logo Outubro Rosa ROIT" 
-                                class="w-32 h-auto mb-6 md:mb-0 md:w-auto" style="max-height: 5rem;" 
+                                class="w-auto h-16 md:h-20" style="max-height: 5rem; min-width: 5rem;" 
                                 onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600 mb-6 md:mb-0\'>ROSA</div>';"
                             >
                             
@@ -108,7 +108,7 @@
                         </div>
                         
                         <!-- Subtítulo centralizado abaixo da H1 e Logo -->
-                        <p class="poppins-regular mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
+                        <p class="poppins-regular mt-6 max-w-3xl text-lg md:text-xl text-gray-600">
                             Uma campanha mundial de conscientização sobre o câncer de mama. Nosso foco é desmistificar a doença e reforçar que a informação é a principal ferramenta para a vida.
                         </p>
                     </div>
@@ -226,7 +226,7 @@
                         <!-- Step 1 Content: Prevenção -->
                         <div id="step1-content" class="step-details hidden">
                             <h4 class="poppins-bold text-2xl mb-4" style="color: #dd1789;">Prevenção</h4>
-                            <p class="poppins-regular mb-4" style="color: #152e3e;">A prevenção primária foca em reduzir a exposição aos fatores de risco que podem ser modificados. Isso significa <span class="font-bold">adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</span></p>
+                            <p class="poppins-regular mb-4" style="color: #152e3e;">A prevenção primária foca em reduzir a exposição aos fatores de risco que podem ser modificados. Isso significa adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</p>
                             <p class="poppins-regular" style="color: #152e3e;"><span class="font-bold">💡 Lembre-se: Pequenas escolhas diárias somam-se a grandes resultados na sua saúde e bem-estar geral.</span></p>
                         </div>
                          <!-- Step 2 Content: Detecção Precoce -->
@@ -322,7 +322,7 @@
                                     <div>
                                         <p class="poppins-regular text-xl font-semibold text-pink-600">🗓️ 24/10 às 17:30</p>
                                         <h3 class="poppins-bold text-xl mt-2 mb-3" style="color: #152e3e;">Happy hour das gurias</h3>
-                                        <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Um momento de descontração só entre garotas! Vista sua brusinha rosa, pegue seu café, coquinha gelada o chá e participe desse momento! Ah, e vai ter sorteio, viu? 💗</p>
+                                        <p class="poppins-regular text-gray-700 text-sm leading-relaxed">Um momento de descontração só entre garotas! Vista sua brusinha rosa, pegue seu café, coquinha gelada o chá e participe desse momento! <span class="font-bold">Ah, e vai ter sorteio, viu? 💗</span></p>
                                     </div>
                                      <a href="#" target="_blank" class="poppins-bold mt-4 inline-block text-center py-2 px-4 rounded-full text-white shadow-lg transition duration-200" style="background-color: #dd1789;">
                                         Marque na agenda
@@ -353,12 +353,12 @@
             <section id="conscientizacao" class="py-20 md:py-28 bg-white">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <!-- Coluna 1: Imagem -->
-                        <div class="flex justify-center md:justify-start">
+                        <!-- Coluna 1: Imagem (Grande) -->
+                        <div class="flex justify-center md:justify-start h-full max-h-96">
                             <img 
                                 src="./assets/pare.png" 
                                 alt="Pare, Pense e Cuide" 
-                                class="w-48 h-auto rounded-lg shadow-xl"
+                                class="h-full w-auto rounded-lg shadow-xl object-contain"
                                 onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600\'>PARE</div>';"
                             >
                         </div>
@@ -371,13 +371,13 @@
                             
                             <div class="p-6 rounded-xl shadow-lg" style="background-color: #fcc4e6;">
                                 <p class="poppins-regular mt-4 text-lg text-gray-800 leading-relaxed">
-                                    Esta jornada do Outubro Rosa é para todos! O cuidado começa com a informação e com a consciência de que a prevenção é um processo contínuo e fundamental. 
+                                    <span class="font-bold">Esta jornada do Outubro Rosa é para todos! O cuidado começa com a informação e com a consciência de que a prevenção é um processo contínuo e fundamental.</span> 
                                     <br><br>
                                     É importante que as mulheres priorizem o autocuidado e agendem seus exames. 
                                     <br><br>
                                     E para os homens: o apoio, o incentivo e o lembrete carinhoso são ações poderosas. 
                                     <br><br>
-                                    O conhecimento é para todos nós!
+                                    <span class="font-bold">O conhecimento é para todos nós!</span>
                                 </p>
                             </div>
                         </div>
