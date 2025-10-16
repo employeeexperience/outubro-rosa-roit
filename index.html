@@ -98,7 +98,7 @@
                         <img 
                             src="./assets/logo-campanha.png" 
                             alt="Logo Outubro Rosa ROIT" 
-                            class="w-auto h-28 md:h-36 lg:h-48 mx-auto mb-6" 
+                            class="w-auto h-48 md:h-64 lg:h-80 mx-auto mb-6" 
                             onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-6xl text-pink-600 mb-6\'>ROSA</div>';"
                         >
                         
@@ -347,24 +347,25 @@
             <!-- SEÇÃO 7: CONSCIENTIZAÇÃO -->
             <section id="conscientizacao" class="py-20 md:py-28 bg-white">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid md:grid-cols-2 gap-10 items-stretch">
-                        <!-- Coluna 1: Imagem (Ajustada à altura do texto) -->
-                        <div class="flex justify-center md:justify-start items-center h-full">
+                    <div class="grid md:grid-cols-2 gap-10 items-start">
+                        <!-- Coluna 1: Imagem (Ajustada para ser média) -->
+                        <div class="flex justify-center md:justify-start items-start">
                             <img 
                                 src="./assets/pare.png" 
                                 alt="Pare, Pense e Cuide" 
-                                class="h-auto w-full max-w-xs md:max-w-full md:h-full rounded-lg shadow-xl object-contain"
+                                class="h-auto w-full max-w-xs md:max-w-md rounded-lg shadow-xl object-contain"
                                 onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600\'>PARE</div>';"
                             >
                         </div>
                         
-                        <!-- Coluna 2: Texto (Novo Design) -->
+                        <!-- Coluna 2: Texto (Altura ajustada para o conteúdo) -->
                         <div class="text-center md:text-left">
                             <h2 class="poppins-bold text-3xl md:text-4xl font-bold mb-6" style="color: #dd1789;">
                                 O conhecimento é o seu maior aliado! 🩷
                             </h2>
                             
-                            <div class="p-6 rounded-xl shadow-lg h-full" style="background-color: #fcc4e6;">
+                            <!-- Removido h-full para que a caixa rosa se ajuste ao tamanho do texto -->
+                            <div class="p-6 rounded-xl shadow-lg" style="background-color: #fcc4e6;">
                                 <p class="poppins-regular mt-4 text-lg text-gray-800 leading-relaxed">
                                     <span class="font-bold">Esta jornada do Outubro Rosa é para todos! O cuidado começa com a informação e com a consciência de que a prevenção é um processo contínuo e fundamental.</span> 
                                     <br><br>
