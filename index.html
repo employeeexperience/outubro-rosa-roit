@@ -88,13 +88,24 @@
         </header>
 
         <main>
-            <!-- SEÇÃO 1: INÍCIO -->
+            <!-- SEÇÃO 1: INÍCIO (HEADER COM LOGO DA CAMPANHA) -->
             <section id="inicio" class="bg-white">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
-                    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
-                        <span class="poppins-bold" style="color: #152e3e;">Outubro Rosa ROIT:</span>
-                        <span class="poppins-bold block" style="color: #dd1789;">Saber para cuidar, cuidar para prevenir.</span>
-                    </h1>
+                    <div class="flex flex-col items-center justify-center md:flex-row md:space-x-6">
+                        <!-- Logo da Campanha -->
+                        <img 
+                            src="./assets/logo-campanha.png" 
+                            alt="Logo Outubro Rosa ROIT" 
+                            class="w-32 h-auto mb-6 md:mb-0 md:w-40"
+                            onerror="this.onerror=null; this.src='placeholder.png'; this.outerHTML='<div class=\'poppins-bold text-4xl text-pink-600 mb-6 md:mb-0\'>ROSA</div>';"
+                        >
+                        
+                        <!-- Título Principal -->
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight md:text-left">
+                            <span class="poppins-bold" style="color: #152e3e;">Outubro Rosa ROIT:</span>
+                            <span class="poppins-bold block" style="color: #dd1789;">Saber para cuidar, cuidar para prevenir.</span>
+                        </h1>
+                    </div>
                     <p class="poppins-regular mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
                         Uma campanha mundial de conscientização sobre o câncer de mama. Nosso foco é desmistificar a doença e reforçar que a informação é a principal ferramenta para a vida.
                     </p>
@@ -102,7 +113,7 @@
             </section>
 
             <!-- SEÇÃO 2: O QUE É -->
-            <section id="oquee" class="py-20 md:py-28" style="background-color: #f4badc;">
+            <section id="oquee" class="py-20 md:py-28" style="background-color: #fcc4e6;">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
                         <h2 class="poppins-bold text-3xl md:text-4xl font-bold" style="color: #152e3e;">O que é e por que o diagnóstico precoce salva</h2>
@@ -172,7 +183,7 @@
                                 <span class="font-bold">💡 Lembre-se: Pequenas escolhas diárias somam-se a grandes resultados na sua saúde e bem-estar geral.</span>
                             </p>
                             <ul class="poppins-regular space-y-3 list-disc list-inside" style="color: #152e3e;">
-                                <li><span class="font-bold">Adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</span></li>
+                                <li>Adotar um estilo de vida ativo, priorizando exercícios físicos e uma alimentação rica e equilibrada.</li>
                                 <li>Manter uma alimentação saudável e equilibrada.</li>
                                 <li>Evitar bebidas alcoólicas e não fumar.</li>
                                 <li>Manter o peso corporal adequado.</li>
