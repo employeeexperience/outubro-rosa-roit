@@ -390,7 +390,6 @@
     </div>
 </section>
 
-
             
             <!-- SEÇÃO 7: CONSCIENTIZAÇÃO -->
             <section id="conscientizacao" class="py-20 md:py-28 bg-white">
@@ -501,51 +500,56 @@ const carousel = document.getElementById('event-carousel');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const container = document.getElementById('event-carousel-container');
-const totalCards = 5; // Definido para 5 cards
+const totalCards = 5; // Total de cards na Agenda
 let currentIndex = 0;
 let cardWidth = 0;
 let cardsPerView = 0;
 
 function getCardsPerView() {
+    // Retorna quantos cards cabem na tela
     if (window.innerWidth >= 1024) return 3;
     if (window.innerWidth >= 768) return 2;
     return 1;
 }
 
 function updateCarousel() {
+    // Recalcula quantos cards cabem na tela
     cardsPerView = getCardsPerView();
-    const cardElements = document.querySelectorAll('.event-card');
-    if (cardElements.length === 0) return;
     
-    // Calcula a largura de um card (incluindo padding)
-    cardWidth = container.clientWidth / cardsPerView;
+    // Calcula a largura de um card (em porcentagem)
+    const moveAmount = 100 / cardsPerView;
     
-    // Garante que o índice não exceda o limite (totalCards - cardsPerView)
+    // Garante que o índice não vá além dos limites visíveis
     const maxIndex = totalCards - cardsPerView;
     if (currentIndex > maxIndex) currentIndex = maxIndex;
     if (currentIndex < 0) currentIndex = 0;
     
-    // Aplica a transformação
-    const offset = -(currentIndex * cardWidth);
-    carousel.style.transform = `translateX(${offset}px)`;
+    // Calcula o deslocamento total e aplica a transformação
+    const offsetPercentage = currentIndex * moveAmount;
+    carousel.style.transform = `translateX(-${offsetPercentage}%)`;
 
-    // Atualiza o estado dos botões (apenas em desktop)
-    if (window.innerWidth >= 768) {
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
-        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-    } else {
-        // Esconde botões no mobile
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
+    // Atualiza o estado dos botões (visibilidade e funcionalidade)
+    if (prevBtn && nextBtn) {
+        const isDesktop = window.innerWidth >= 768;
+        
+        // Exibe/esconde botões
+        prevBtn.style.display = isDesktop ? 'block' : 'none';
+        nextBtn.style.display = isDesktop ? 'block' : 'none';
+
+        if (isDesktop) {
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= maxIndex;
+            
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+        }
     }
 }
 
 // Event Listeners para botões
 if (prevBtn && nextBtn) {
     nextBtn.addEventListener('click', () => {
-        const maxIndex = totalCards - cardsPerView;
+        const maxIndex = totalCards - getCardsPerView();
         if (currentIndex < maxIndex) {
             currentIndex++;
             updateCarousel();
@@ -564,10 +568,10 @@ if (prevBtn && nextBtn) {
 window.addEventListener('resize', updateCarousel);
 window.addEventListener('load', updateCarousel);
 
-
     </script>
 </body>
 </html>
+
 
 
 
