@@ -453,64 +453,75 @@
             // Mostrar o primeiro pilar por padrão
             showStep(1);
             
-            // Lógica JavaScript do Carrossel (Apenas rolagem tátil e responsividade)
-            const carouselContainer = document.getElementById('event-carousel-container');
-            const carousel = document.getElementById('event-carousel');
-            const cards = document.querySelectorAll('.event-card');
-            
-            if (carouselContainer && carousel && cards.length > 0) {
-                const cardWidth = cards[0].offsetWidth; // Largura do card + padding
-                
-                // Define a largura total do carrossel para que a rolagem funcione
-                const updateCarousel = () => {
-                    const containerWidth = carouselContainer.offsetWidth;
-                    // Se for desktop/tablet, define a largura total para que a rolagem horizontal funcione
-                    if (window.innerWidth >= 768) {
-                        const totalWidth = cards.length * (containerWidth / 3);
-                        carousel.style.width = `${totalWidth}px`;
-                    } else {
-                        // No mobile, a rolagem é nativa (overflow-x-auto)
-                        carousel.style.width = 'fit-content';
-                    }
-                };
+            // Lógica JavaScript do Carrossel (Adicionar ao final da tag <script>)
+const carousel = document.getElementById('event-carousel');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const container = document.getElementById('event-carousel-container');
+// NOTA: O código original tem 3 cards. Se você tiver mais (como 5), mude este valor:
+const totalCards = 3; 
+let currentIndex = 0;
+let cardWidth = 0;
+let cardsPerView = 0;
 
-                // Garante que o carrossel é atualizado no carregamento e redimensionamento
-                window.addEventListener('load', updateCarousel);
-                window.addEventListener('resize', updateCarousel);
-                
-                // Adiciona rolagem suave no container
-                carouselContainer.addEventListener('wheel', (e) => {
-                    e.preventDefault();
-                    carouselContainer.scrollLeft += e.deltaY;
-                });
-            }
+function getCardsPerView() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+}
 
-            // Lógica da navegação ativa
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
+function updateCarousel() {
+    cardsPerView = getCardsPerView();
+    const cardElements = document.querySelectorAll('.event-card');
+    if (cardElements.length === 0) return;
+    
+    // Calcula a largura de um card (considerando padding)
+    cardWidth = container.clientWidth / cardsPerView;
+    
+    // Garante que o índice não exceda o limite (totalCards - cardsPerView)
+    const maxIndex = totalCards - cardsPerView;
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
+    
+    // Aplica a transformação
+    const offset = -(currentIndex * cardWidth);
+    carousel.style.transform = `translateX(${offset}px)`;
 
-            const navObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        // Atualiza o link do menu principal
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, { rootMargin: '-50% 0px -50% 0px' });
+    // Atualiza o estado dos botões (apenas em desktop)
+    if (window.innerWidth >= 768) {
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+    }
+}
 
-            sections.forEach(section => {
-                navObserver.observe(section);
-            });
-        });
+// Event Listeners para botões
+if (prevBtn && nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        const maxIndex = totalCards - cardsPerView;
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateCarousel();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    });
+}
+
+// Inicializa e atualiza ao redimensionar
+window.addEventListener('resize', updateCarousel);
+window.addEventListener('load', updateCarousel);
+
     </script>
 </body>
 </html>
+
 
 
 
