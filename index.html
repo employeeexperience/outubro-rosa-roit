@@ -500,7 +500,7 @@ const carousel = document.getElementById('event-carousel');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const container = document.getElementById('event-carousel-container');
-const totalCards = 5; 
+const totalCards = 5; // Definido para 5 cards
 let currentIndex = 0;
 let cardWidth = 0;
 let cardsPerView = 0;
@@ -516,7 +516,7 @@ function updateCarousel() {
     const cardElements = document.querySelectorAll('.event-card');
     if (cardElements.length === 0) return;
     
-    // Calcula a largura de um card (considerando padding)
+    // Calcula a largura de um card (incluindo padding)
     cardWidth = container.clientWidth / cardsPerView;
     
     // Garante que o índice não exceda o limite (totalCards - cardsPerView)
@@ -534,6 +534,10 @@ function updateCarousel() {
         nextBtn.disabled = currentIndex >= maxIndex;
         prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
         nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+    } else {
+        // Esconde botões no mobile
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
     }
 }
 
@@ -559,9 +563,11 @@ if (prevBtn && nextBtn) {
 window.addEventListener('resize', updateCarousel);
 window.addEventListener('load', updateCarousel);
 
+
     </script>
 </body>
 </html>
+
 
 
 
