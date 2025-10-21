@@ -497,12 +497,24 @@
             // Mostrar o primeiro pilar por padrão
             showStep(1);
             
-            // Lógica JavaScript do Carrossel (Adicionar ao final da tag <script>)
+           // Lógica JavaScript do Carrossel (Adicionar ao final da tag <script>)
 const carousel = document.getElementById('event-carousel');
+const container = document.getElementById('event-carousel-container');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const totalCards = 5; // Total de cards na Agenda
 let currentIndex = 0;
+
+function getCardWidth() {
+    // Retorna a largura de um card visível, incluindo o padding de 16px (p-4) de cada lado.
+    // Usamos o primeiro card como referência para a largura do item.
+    const firstCard = carousel.querySelector('.event-card');
+    if (firstCard) {
+        // Retorna a largura real do card (incluindo margens e padding)
+        return firstCard.offsetWidth;
+    }
+    return 300; // Valor fallback
+}
 
 function getCardsPerView() {
     // Define quantos cards devem ser visíveis por vez
@@ -512,28 +524,22 @@ function getCardsPerView() {
 }
 
 function updateCarousel() {
+    const cardWidth = getCardWidth();
     const cardsPerView = getCardsPerView();
-    const totalVisibleCards = Math.min(totalCards, cardsPerView);
     
-    // Calcula o deslocamento. Se 3 cards são visíveis (1/3), o movimento é de 33.33%
-    const cardMovePercentage = 100 / cardsPerView;
+    // Calcula o deslocamento total necessário em pixels
+    const offsetPixels = currentIndex * cardWidth;
 
     // Garante que o índice não exceda os limites
     const maxIndex = totalCards - cardsPerView;
     if (currentIndex > maxIndex) currentIndex = maxIndex;
     if (currentIndex < 0) currentIndex = 0;
 
-    // Aplica a transformação. Move o carrossel em incrementos (Ex: 0%, 33.33%, 66.66%...)
-    const offsetPercentage = currentIndex * cardMovePercentage;
-    carousel.style.transform = `translateX(-${offsetPercentage}%)`;
-
-    // 1. Otimiza a largura do contêiner (Obrigatório para que os cards caibam corretamente)
-    // Se cardsPerView for 3, a largura total será 5/3 * 100% = 166.66% para 5 cards.
-    const carouselWidth = (totalCards / cardsPerView) * 100;
-    carousel.style.width = `${carouselWidth}%`;
+    // Aplica a transformação baseada em pixels
+    carousel.style.transform = `translateX(-${offsetPixels}px)`;
 
 
-    // 2. Atualiza o estado dos botões (visibilidade e funcionalidade)
+    // Atualiza o estado dos botões (visibilidade e funcionalidade)
     if (prevBtn && nextBtn) {
         const isDesktop = window.innerWidth >= 768;
         
@@ -573,9 +579,11 @@ if (prevBtn && nextBtn) {
 window.addEventListener('resize', updateCarousel);
 window.addEventListener('load', updateCarousel);
 
+
     </script>
 </body>
 </html>
+
 
 
 
