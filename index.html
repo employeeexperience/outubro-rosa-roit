@@ -496,87 +496,169 @@
             showStep(1);
 
 </script>
-// Lógica JavaScript do Carrossel (Adicionar ao final da tag <script>)
-const carousel = document.getElementById('event-carousel');
-const container = document.getElementById('event-carousel-container');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-const totalCards = 5; // Total de cards na Agenda
-let currentIndex = 0;
-
-function getCardWidth() {
-    // Retorna a largura de um card visível, incluindo o padding de 16px (p-4) de cada lado.
-    // Usamos o primeiro card como referência para a largura do item.
-    const firstCard = carousel.querySelector('.event-card');
-    if (firstCard) {
-        // Retorna a largura real do card (incluindo margens e padding)
-        return firstCard.offsetWidth;
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', () => {
+    // Limpa intervalos antigos caso já existam (evita conflito)
+    if (window.__roiterCarouselInterval) {
+      clearInterval(window.__roiterCarouselInterval);
+      window.__roiterCarouselInterval = null;
     }
-    return 300; // Valor fallback
-}
 
-function getCardsPerView() {
-    // Define quantos cards devem ser visíveis por vez
-    if (window.innerWidth >= 1024) return 3; // Desktop
-    if (window.innerWidth >= 768) return 2;  // Tablet
-    return 1; // Mobile
-}
+    const carousel = document.getElementById('event-carousel');
+    const container = document.getElementById('event-carousel-container');
+    if (!carousel || !container) return;
 
-function updateCarousel() {
-    const cardWidth = getCardWidth();
-    const cardsPerView = getCardsPerView();
-    
-    // Calcula o deslocamento total necessário em pixels
-    const offsetPixels = currentIndex * cardWidth;
+    let cards = Array.from(carousel.querySelectorAll('.event-card'));
+    if (cards.length === 0) return;
 
-    // Garante que o índice não exceda os limites
-    const maxIndex = totalCards - cardsPerView;
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-    if (currentIndex < 0) currentIndex = 0;
+    // melhorar performance de transformações
+    carousel.style.willChange = 'transform';
 
-    // Aplica a transformação baseada em pixels
-    carousel.style.transform = `translateX(-${offsetPixels}px)`;
+    let currentIndex = 0;
+    const intervalMs = 3500;
+    let autoInterval = null;
+    let isPaused = false;
 
+    function getCardWidth() {
+      // usamos getBoundingClientRect para incluir paddings reais
+      const first = cards[0].getBoundingClientRect();
+      return Math.round(first.width);
+    }
 
-    // Atualiza o estado dos botões (visibilidade e funcionalidade)
+    function getCardsPerView() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
+    }
+
+    function maxIndex() {
+      return Math.max(0, cards.length - getCardsPerView());
+    }
+
+    function goToIndex(idx, animate = true) {
+      // garante índices válidos
+      const max = maxIndex();
+      if (idx < 0) idx = 0;
+      if (idx > max) idx = max;
+
+      currentIndex = idx;
+      const w = getCardWidth();
+      // usa translate3d para melhor performance
+      if (!animate) carousel.style.transition = 'none';
+      else carousel.style.transition = 'transform 0.5s ease';
+
+      carousel.style.transform = `translate3d(-${currentIndex * w}px, 0, 0)`;
+      // força reflow rápido antes de reativar transição (apenas se tiramos)
+      if (!animate) void carousel.offsetWidth;
+      if (!animate) carousel.style.transition = '';
+      updateButtonsState();
+    }
+
+    // pausar/retomar autoplay
+    function startAuto() {
+      stopAuto();
+      autoInterval = setInterval(() => {
+        if (!isPaused) {
+          const nxt = currentIndex + 1;
+          if (nxt > maxIndex()) {
+            goToIndex(0);
+          } else {
+            goToIndex(nxt);
+          }
+        }
+      }, intervalMs);
+      // also expose globally to be able to clear from dev console if needed
+      window.__roiterCarouselInterval = autoInterval;
+    }
+
+    function stopAuto() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+      }
+    }
+
+    // Hide/disable prev/next buttons if present (mantém compatibilidade)
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function updateButtonsState() {
+      if (!prevBtn || !nextBtn) return;
+      const max = maxIndex();
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= max;
+      prevBtn.style.opacity = prevBtn.disabled ? '0.5' : '1';
+      nextBtn.style.opacity = nextBtn.disabled ? '0.5' : '1';
+    }
+
     if (prevBtn && nextBtn) {
-        const isDesktop = window.innerWidth >= 768;
-        
-        // Exibe/esconde botões em telas pequenas
-        prevBtn.style.display = isDesktop ? 'block' : 'none';
-        nextBtn.style.display = isDesktop ? 'block' : 'none';
-
-        if (isDesktop) {
-            prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex >= maxIndex;
-            
-            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-            nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-        }
+      prevBtn.addEventListener('click', () => {
+        goToIndex(currentIndex - 1);
+      });
+      nextBtn.addEventListener('click', () => {
+        goToIndex(currentIndex + 1);
+      });
     }
-}
 
-// Event Listeners para botões
-if (prevBtn && nextBtn) {
-    nextBtn.addEventListener('click', () => {
-        const maxIndex = totalCards - getCardsPerView();
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-            updateCarousel();
-        }
+    // pausa ao focar/interagir
+    container.addEventListener('mouseenter', () => { isPaused = true; });
+    container.addEventListener('mouseleave', () => { isPaused = false; });
+
+    // suporte tocável (swipe básico)
+    let startX = 0, deltaX = 0, isTouching = false;
+    container.addEventListener('touchstart', (e) => {
+      stopAuto();
+      isTouching = true;
+      startX = e.touches[0].clientX;
+    }, {passive:true});
+    container.addEventListener('touchmove', (e) => {
+      if (!isTouching) return;
+      deltaX = e.touches[0].clientX - startX;
+      // mover temporariamente (sem commit)
+      carousel.style.transition = 'none';
+      carousel.style.transform = `translate3d(-${currentIndex * getCardWidth() - deltaX}px,0,0)`;
+    }, {passive:true});
+    container.addEventListener('touchend', () => {
+      if (!isTouching) return;
+      isTouching = false;
+      const threshold = getCardWidth() * 0.25;
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > 0) goToIndex(currentIndex - 1);
+        else goToIndex(currentIndex + 1);
+      } else {
+        goToIndex(currentIndex); // retorna pro estado
+      }
+      deltaX = 0;
+      startAuto();
     });
 
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
+    // Recalcula na mudança de viewport
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      // atualiza referência de cards (se layout mudar)
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        cards = Array.from(carousel.querySelectorAll('.event-card'));
+        // mantém currentIndex válido
+        if (currentIndex > maxIndex()) currentIndex = maxIndex();
+        goToIndex(currentIndex, false);
+      }, 150);
     });
-}
 
-// Inicializa e atualiza ao redimensionar
-window.addEventListener('resize', updateCarousel);
-window.addEventListener('load', updateCarousel);
+    // Inicializa a largura do container interno (opcional)
+    // não forçamos width total porque cards têm largura via tailwind (w-full, md:w-1/2, lg:w-1/3)
+    // apenas garantimos o posicionamento inicial sem animação:
+    goToIndex(0, false);
+    startAuto();
+
+    // expõe funções para debug (opcional)
+    window.__roiterCarousel = { goToIndex, startAuto, stopAuto };
+  });
+})();
+</script>
+
 </body>
 </html>
+
 
