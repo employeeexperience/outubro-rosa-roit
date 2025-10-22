@@ -494,8 +494,9 @@
 
             // Mostrar o primeiro pilar por padrão
             showStep(1);
-            
-           // Lógica JavaScript do Carrossel (Adicionar ao final da tag <script>)
+
+</script>
+// Lógica JavaScript do Carrossel (Adicionar ao final da tag <script>)
 const carousel = document.getElementById('event-carousel');
 const container = document.getElementById('event-carousel-container');
 const prevBtn = document.getElementById('prev-btn');
@@ -576,33 +577,6 @@ if (prevBtn && nextBtn) {
 // Inicializa e atualiza ao redimensionar
 window.addEventListener('resize', updateCarousel);
 window.addEventListener('load', updateCarousel);
-
-
-    <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const carousel = document.getElementById('event-carousel');
-  const cards = document.querySelectorAll('#event-carousel .event-card');
-  const totalCards = cards.length;
-  let index = 0;
-
-  const interval = 4000;
-
-  function slideCarousel() {
-    index++;
-    if (index >= totalCards) index = 0;
-    const cardWidth = cards[0].offsetWidth;
-    carousel.style.transform = `translateX(-${index * cardWidth}px)`;
-  }
-
-  // Ajusta a largura total dinamicamente
-  carousel.style.width = `${cards.length * 100}%`;
-
-  // Inicia o carrossel automático
-  setInterval(slideCarousel, interval);
-});
-</script>
-
 </body>
 </html>
-</body>
-</html>
+
