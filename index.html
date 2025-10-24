@@ -657,9 +657,40 @@
   });
 })();
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const stepCards = document.querySelectorAll(".step-card");
+  const stepContents = document.querySelectorAll(".step-details");
+  const contentBox = document.getElementById("step-content");
+
+  stepCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const step = card.dataset.step;
+
+      // Remove destaque anterior
+      stepCards.forEach(c => c.classList.remove("border-[#dd1789]", "shadow-xl"));
+      // Adiciona destaque ao card clicado
+      card.classList.add("border-[#dd1789]", "shadow-xl");
+
+      // Esconde todos os conteúdos
+      stepContents.forEach(content => content.classList.add("hidden"));
+      // Mostra o conteúdo correspondente
+      document.getElementById(`step${step}-content`).classList.remove("hidden");
+
+      // Anima a área de conteúdo (leve fade-in)
+      contentBox.style.opacity = "0";
+      setTimeout(() => {
+        contentBox.style.opacity = "1";
+        contentBox.style.transition = "opacity 0.4s ease";
+      }, 100);
+    });
+  });
+});
+</script>
 
 </body>
 </html>
+
 
 
 
