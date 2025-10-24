@@ -441,32 +441,34 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Animação do número (95%)
-            const cureRateEl = document.getElementById('cure-rate');
-            const targetNumber = 95;
-            let currentNumber = 0;
-            
-            const animateNumber = () => {
-                const interval = setInterval(() => {
-                    if (currentNumber < targetNumber) {
-                        currentNumber++;
-                        cureRateEl.textContent = `${currentNumber}%`;
-                    } else {
-                        clearInterval(interval);
-                    }
-                }, 20); 
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    animateNumber();
-                    observer.disconnect();
-                }
-            }, { threshold: 0.8 });
+            // === ANIMAÇÃO DO NÚMERO (95%) ===
+document.addEventListener('DOMContentLoaded', function() {
+    const cureRateEl = document.getElementById('cure-rate');
+    if (!cureRateEl) return;
 
-            if (cureRateEl) {
-                observer.observe(cureRateEl);
+    const targetNumber = 95;
+    let currentNumber = 0;
+
+    const animateNumber = () => {
+        const interval = setInterval(() => {
+            if (currentNumber < targetNumber) {
+                currentNumber++;
+                cureRateEl.textContent = `${currentNumber}%`;
+            } else {
+                clearInterval(interval);
             }
+        }, 20); // velocidade da contagem
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            animateNumber();
+            observer.disconnect();
+        }
+    }, { threshold: 0.8 });
+
+    observer.observe(cureRateEl);
+});
 
             // Lógica dos Pilares Interativos (2 Pilares)
             const stepCards = document.querySelectorAll('.step-card');
@@ -701,6 +703,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
