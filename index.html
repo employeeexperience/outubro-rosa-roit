@@ -663,6 +663,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const stepContents = document.querySelectorAll(".step-details");
   const contentBox = document.getElementById("step-content");
 
+  // Define o primeiro card e conteúdo como padrão ao carregar
+  const firstCard = document.getElementById("step1-card");
+  const firstContent = document.getElementById("step1-content");
+
+  if (firstCard && firstContent) {
+    firstCard.classList.add("border-[#dd1789]", "shadow-xl");
+    firstContent.classList.remove("hidden");
+  }
+
   stepCards.forEach((card) => {
     card.addEventListener("click", () => {
       const step = card.dataset.step;
@@ -675,7 +684,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Esconde todos os conteúdos
       stepContents.forEach(content => content.classList.add("hidden"));
       // Mostra o conteúdo correspondente
-      document.getElementById(`step${step}-content`).classList.remove("hidden");
+      const selectedContent = document.getElementById(`step${step}-content`);
+      selectedContent.classList.remove("hidden");
 
       // Anima a área de conteúdo (leve fade-in)
       contentBox.style.opacity = "0";
@@ -688,8 +698,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+
 </body>
 </html>
+
 
 
 
